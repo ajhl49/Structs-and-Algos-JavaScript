@@ -1,0 +1,19 @@
+{
+  "name": "structs-and-algos-javascript",
+  "version": "1.0.0",
+  "description": "Implementations of several data structures and basic algorithms in JavaScript form.",
+  "main": "algo-structs.js",
+  "scripts": {
+    "test": "tape unit-tests/*.unittests.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//ajhl49/Structs-and-Algos-JavaScript.git"
+  },
+  "author": "Aj Leino",
+  "license": "MIT",
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0"
+  }
+}

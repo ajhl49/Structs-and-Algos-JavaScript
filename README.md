@@ -1,5 +1,7 @@
 # Structs-and-Algos-JavaScript
-Repository demonstrating implementations of several data structures and algorithms using basic JavaScript.
+Repository demonstrating implementations of several data structures and
+algorithms using basic JavaScript. This repository/package can be imported into
+Node.js modules for use.
 
 # Data Structures Implemented
 
