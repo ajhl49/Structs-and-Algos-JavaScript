@@ -47,16 +47,6 @@ BinarySearchTree.prototype.contains = function (key) {
 };
 
 /**
- * Determines if the BST contains a specific key value within itself through
- * a recursive search.
- * @param  {number} key The number to search for within the tree.
- * @return {boolean}    True if value is contained within the BST; otherwise, false.
- */
-BinarySearchTree.prototype.containsRecursive = function (key) {
-    return this._containsHelper(this.root, key);
-};
-
-/**
  * Inserts a number into the binary search tree, if it is unique.
  *
  * @param  {number} key The number to insert into the tree.
@@ -137,30 +127,6 @@ BinarySearchTree.prototype._insertHelper = function (node, key) {
     }
 
     return node;
-};
-
-/**
- * Helper method for <code>containsRecursive</code>. Provided key is searched
- * for in the node and its children in a recursive fashion.
- *
- * @param  {Node}   node The current node in the recursive search process.
- * @param  {number} key  The key being searched for.
- * @return {[type]}      True if the key is contained by the node or its children; otherwise, false.
- */
-BinarySearchTree.prototype._containsHelper = function (node, key) {
-    if (node === null) {
-        return false;
-    } else if (node.key === key) {
-        return true;
-    }
-    if (key < node.key) {
-        return containsHelper(node.left, key);
-    }
-    return containsHelper(node.right, key);
-};
-
-BinarySearchTree.prototype._deleteHelper = function (node, key) {
-
 };
 
 BinarySearchTree.prototype._findMin = function (node) {

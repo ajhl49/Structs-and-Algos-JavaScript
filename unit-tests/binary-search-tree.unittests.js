@@ -1,7 +1,7 @@
 var test = require('tape');
 var BinarySearchTree = require('../data-structures/binary-search-tree.js');
 
-test('Test empty iterative search', function (assert) {
+test('Test empty search', function (assert) {
     var bst = new BinarySearchTree();
 
     var actual = bst.contains(0);// Any number will do, should not return false
@@ -10,16 +10,7 @@ test('Test empty iterative search', function (assert) {
     assert.end();
 });
 
-test('Test empty recursive search', function (assert) {
-    var bst = new BinarySearchTree();
-
-    var actual = bst.containsRecursive(0);
-
-    assert.equal(actual, false);
-    assert.end();
-});
-
-test('Test tree with multiple elements, iterative search', function (assert) {
+test('Test tree with multiple elements', function (assert) {
     var bst = new BinarySearchTree();
 
     for (var i = 0; i < 10; i++) {
