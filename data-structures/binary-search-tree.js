@@ -53,19 +53,7 @@ BinarySearchTree.prototype.contains = function (key) {
  * @return {boolean}    True if value is contained within the BST; otherwise, false.
  */
 BinarySearchTree.prototype.containsRecursive = function (key) {
-    function containsHelper (node, key) {
-        if (node === null) {
-            return false;
-        } else if (node.key === key) {
-            return true;
-        }
-        if (key < node.key) {
-            return containsHelper(node.left, key);
-        }
-        return containsHelper(node.right, key);
-    }
-
-    return containsHelper(this.root, key);
+    return this._containsHelper(this.root, key);
 };
 
 /**
@@ -115,6 +103,26 @@ BinarySearchTree.prototype._insertHelper = function (node, key) {
 };
 
 /**
+ * Helper method for <code>containsRecursive</code>. Provided key is searched
+ * for in the node and its children in a recursive fashion.
+ *
+ * @param  {Node}   node The current node in the recursive search process.
+ * @param  {number} key  The key being searched for.
+ * @return {[type]}      True if the key is contained by the node or its children; otherwise, false.
+ */
+BinarySearchTree.prototype._containsHelper = function(node, key) {
+    if (node === null) {
+        return false;
+    } else if (node.key === key) {
+        return true;
+    }
+    if (key < node.key) {
+        return containsHelper(node.left, key);
+    }
+    return containsHelper(node.right, key);
+};
+
+/**
  * Traverses through the BST in order (left-to-right increasing), calling the
  * provided the callback function on each node.
  *
@@ -129,6 +137,13 @@ BinarySearchTree.prototype._inOrder = function (node, callback) {
     }
 };
 
+/**
+ * Traverses through the BST in pre-order (node, left child, right child),
+ * calling the provided callback function on each node.
+ *
+ * @param  {Node}     node     The current node being traversed through.
+ * @param  {Function} callback The function to call on the current node.
+ */
 BinarySearchTree.prototype._preOrder = function (node, callback) {
     if (node !== null) {
         callback(node);
@@ -137,6 +152,13 @@ BinarySearchTree.prototype._preOrder = function (node, callback) {
     }
 };
 
+/**
+ * Traverses through the BST in post-order (left child, right child, node),
+ * calling the provided callback function on each node.
+ *
+ * @param  {Node}     node     The current node being traversed through.
+ * @param  {Function} callback The function to call on the current node.
+ */
 BinarySearchTree.prototype._postOrder = function (node, callback) {
     if (node !== null) {
         this.postOrder(node.left, callback);

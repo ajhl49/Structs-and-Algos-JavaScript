@@ -19,6 +19,19 @@ test('Test empty recursive search', function (assert) {
     assert.end();
 });
 
+test('Test tree with multiple elements, iterative search', function (assert) {
+    var bst = new BinarySearchTree();
+
+    for (var i = 0; i < 10; i++) {
+        bst.insert(i);
+    }
+
+    assert.equal(bst.contains(5), true);
+    assert.equal(bst.contains(-5), false);
+
+    assert.end();
+});
+
 test('Test adding one to empty tree', function (assert) {
     var bst = new BinarySearchTree();
 
