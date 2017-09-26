@@ -116,8 +116,10 @@ test('Test the ordered array conversion using random values', function (assert) 
     var expectedArray = [];
     for (var i = 0; i < 10; i++) {
         var cVal = Math.floor(Math.random() * (99) + 1);
-        expectedArray.push(cVal);
-        bst.insert(cVal);
+        if (!expectedArray.includes(cVal)) {
+            expectedArray.push(cVal);
+            bst.insert(cVal);
+        }
     }
 
     expectedArray = expectedArray.sort(function (a, b) {
@@ -131,6 +133,56 @@ test('Test the ordered array conversion using random values', function (assert) 
     });
 
     assert.equal(bst.toInOrderArray().toString(), expectedArray.toString());
+
+    assert.end();
+});
+
+test('Test key removal from empty tree', function (assert) {
+    var bst = new BinarySearchTree();
+
+    // Assert that tree is empty
+    assert.equal(bst.root, null);
+
+    bst.delete(5);
+
+    assert.equal(bst.root, null);
+
+    assert.end();
+
+});
+
+test('Test key removal from tree with one element', function (assert) {
+    var bst = new BinarySearchTree();
+
+    bst.insert(5);
+
+    assert.equal(bst.contains(5), true);
+
+    bst.delete(5);
+
+    assert.equal(bst.contains(5), false);
+    assert.equal(bst.root, null);
+
+    assert.end();
+});
+
+test('Test key removal from tree (right child, no left)', function (assert) {
+    var bst = new BinarySearchTree();
+
+    bst.insert(1);
+    bst.insert(2);
+    bst.insert(3);
+
+    assert.equal(bst.contains(1), true);
+    assert.equal(bst.contains(2), true);
+    assert.equal(bst.contains(3), true);
+    assert.equal(bst.root.right.key, 2);
+
+    bst.delete(2);
+
+    assert.equal(bst.contains(1), true, 'Root key in tree');
+    assert.equal(bst.contains(3), true);
+    assert.equal(bst.contains(2), false, 'Key 2 removed from tree');
 
     assert.end();
 });

@@ -66,6 +66,43 @@ BinarySearchTree.prototype.insert = function (key) {
 };
 
 /**
+ * Deletes a key from the tree.
+ *
+ * @param  {number} key The number to remove from the tree.
+ */
+BinarySearchTree.prototype.delete = function (key) {
+    var deleteHelper = function (node, key) {
+        if (node === null) {
+            return null;
+        }
+
+        if (key < node.key) {
+            node.left = deleteHelper(node.left, key);
+        } else if (key > node.key) {
+            node.right = deleteHelper(node.right, key);
+        } else {
+            if (node.left === null) {
+                var temp = node.right;
+                return temp;
+            } else if (node.right === null) {
+                var temp = node.left;
+                return temp;
+            }
+
+            var temp = this._findMin(node.right);
+
+            node.key = temp;
+
+            node.right = deleteNode(node.right, temp);
+        }
+
+        return node;
+    }
+
+    this.root = deleteHelper(this.root, key);
+};
+
+/**
  * Converts the BST into an ordered array in ascending value.
  *
  * @return {Array} The array of ordered values within the tree.
@@ -110,7 +147,7 @@ BinarySearchTree.prototype._insertHelper = function (node, key) {
  * @param  {number} key  The key being searched for.
  * @return {[type]}      True if the key is contained by the node or its children; otherwise, false.
  */
-BinarySearchTree.prototype._containsHelper = function(node, key) {
+BinarySearchTree.prototype._containsHelper = function (node, key) {
     if (node === null) {
         return false;
     } else if (node.key === key) {
@@ -120,6 +157,17 @@ BinarySearchTree.prototype._containsHelper = function(node, key) {
         return containsHelper(node.left, key);
     }
     return containsHelper(node.right, key);
+};
+
+BinarySearchTree.prototype._deleteHelper = function (node, key) {
+
+};
+
+BinarySearchTree.prototype._findMin = function (node) {
+    while (node.left) {
+        node = node.left;
+    }
+    return node.key;
 };
 
 /**
