@@ -10,7 +10,7 @@ test('Test empty search', function (assert) {
     assert.end();
 });
 
-test('Test tree with multiple elements', function (assert) {
+test('Test searching tree with multiple elements', function (assert) {
     var bst = new BinarySearchTree();
 
     for (var i = 0; i < 10; i++) {
@@ -69,22 +69,6 @@ test('Test adding descending keys to tree', function (assert) {
     }
 
     assert.equal(currNode, null);
-
-    assert.end();
-});
-
-test('Test the insertion helper function', function (assert) {
-    var rootNode = new BinarySearchTree.Node(5);
-
-    BinarySearchTree.prototype._insertHelper(rootNode, 3); // rootNode.left
-    BinarySearchTree.prototype._insertHelper(rootNode, 7); // rootNode.right
-    BinarySearchTree.prototype._insertHelper(rootNode, 4); // rootNode.left.right
-    BinarySearchTree.prototype._insertHelper(rootNode, 2); // rootNode.left.left
-
-    assert.equal(rootNode.left.key, 3);
-    assert.equal(rootNode.right.key, 7);
-    assert.equal(rootNode.left.right.key, 4);
-    assert.equal(rootNode.left.left.key, 2);
 
     assert.end();
 });

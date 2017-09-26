@@ -52,7 +52,21 @@ BinarySearchTree.prototype.contains = function (key) {
  * @param  {number} key The number to insert into the tree.
  */
 BinarySearchTree.prototype.insert = function (key) {
-    this.root = this._insertHelper(this.root, key);
+    function insertHelper(node, key) {
+        if (node === null) {
+            return new BinarySearchTree.Node(key);
+        }
+
+        if (key < node.key) {
+            node.left = insertHelper(node.left, key);
+        } else if (key > node.key) {
+            node.right = insertHelper(node.right, key);
+        }
+
+        return node;
+    }
+
+    this.root = insertHelper(this.root, key);
 };
 
 /**
@@ -105,28 +119,6 @@ BinarySearchTree.prototype.toInOrderArray = function () {
     });
 
     return arr;
-};
-
-/**
- * Helper method for <code>insert</code>. Provided key is inserted into the
- * BST, creating a new leaf if the key is unique.
- *
- * @param  {Node} node   The current node to process for key insertion.
- * @param  {number} key  The number to add to the current subtree.
- * @return {Node}        The current or newly created node.
- */
-BinarySearchTree.prototype._insertHelper = function (node, key) {
-    if (node === null) {
-        return new BinarySearchTree.Node(key);
-    }
-
-    if (key < node.key) {
-        node.left = this._insertHelper(node.left, key);
-    } else if (key > node.key) {
-        node.right = this._insertHelper(node.right, key);
-    }
-
-    return node;
 };
 
 BinarySearchTree.prototype._findMin = function (node) {
